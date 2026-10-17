@@ -105,10 +105,13 @@ export function StackedBar({
   segments,
   formatValue = formatBDT,
   emptyMessage = "Nothing to split yet.",
+  showLegend = true,
 }: {
   segments: StackSegment[];
   formatValue?: (value: number) => string;
   emptyMessage?: string;
+  /** Hide the legend when the caller already lists the figures. */
+  showLegend?: boolean;
 }) {
   const total = segments.reduce((s, x) => s + x.value, 0);
   if (!total) return <p className="py-8 text-center text-xs text-theme-muted">{emptyMessage}</p>;
@@ -131,21 +134,23 @@ export function StackedBar({
           );
         })}
       </div>
-      <ul className="mt-3 flex flex-col gap-1.5">
-        {segments.map((seg, i) => (
-          <li key={seg.label} className="flex items-center gap-2 text-xs">
-            <span
-              className="h-2.5 w-2.5 shrink-0 rounded-sm"
-              style={{ backgroundColor: seg.fill ?? STACK_PALETTE[i % STACK_PALETTE.length] }}
-            />
-            <span className="min-w-0 flex-1 truncate text-theme">{seg.label}</span>
-            <span className="shrink-0 text-theme-muted">{formatValue(seg.value)}</span>
-            <span className="w-12 shrink-0 text-right font-medium text-theme-strong">
-              {((seg.value / total) * 100).toFixed(0)}%
-            </span>
-          </li>
-        ))}
-      </ul>
+      {showLegend ? (
+        <ul className="mt-3 flex flex-col gap-1.5">
+          {segments.map((seg, i) => (
+            <li key={seg.label} className="flex items-center gap-2 text-xs">
+              <span
+                className="h-2.5 w-2.5 shrink-0 rounded-sm"
+                style={{ backgroundColor: seg.fill ?? STACK_PALETTE[i % STACK_PALETTE.length] }}
+              />
+              <span className="min-w-0 flex-1 truncate text-theme">{seg.label}</span>
+              <span className="shrink-0 text-theme-muted">{formatValue(seg.value)}</span>
+              <span className="w-12 shrink-0 text-right font-medium text-theme-strong">
+                {((seg.value / total) * 100).toFixed(0)}%
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 }

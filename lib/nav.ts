@@ -13,6 +13,7 @@ import {
   PlusCircle,
   Receipt,
   ShoppingCart,
+  Target,
   UserCheck,
   UserPlus,
   Users,
@@ -120,6 +121,15 @@ const REL_NAV: RelNavItem[] = [
     label: "New Payment",
     icon: Wallet,
     roles: ENTRY_ROLES,
+  },
+  {
+    // Weekly payment-collection targets. Admin/Accounts/Credit Control own the
+    // money register and see the full editable register; department roles get
+    // the same route but a read-only page scoped to their own row.
+    path: "/targets",
+    label: "Collection Targets",
+    icon: Target,
+    roles: [...ENTRY_ROLES, "admin"],
   },
   {
     path: "/pending-bills",
@@ -308,6 +318,7 @@ const NAV_OVERRIDES: Partial<Record<Role, RelNavItem[]>> = {
   eid_juniors: [
     { path: "/pending-bills", label: "Pending Bills", icon: FileClock, roles: ["eid_juniors"] },
     { path: "/payments", label: "Payments", icon: Receipt, roles: ["eid_juniors"] },
+    { path: "/targets", label: "My Targets", icon: Target, roles: ["eid_juniors"] },
   ],
   creditcontrol: REL_NAV.filter((item) => item.path !== "/distribute"),
 };

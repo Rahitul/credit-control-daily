@@ -10,6 +10,7 @@ import {
   Hash,
   UserCheck,
   Link2,
+  NotebookPen,
   AlertCircle,
   CheckCircle2,
   Info,
@@ -524,6 +525,19 @@ export function PaymentForm({
               disabled
             />
             <input type="hidden" name="entryBy" value={defaultPerson ?? ""} />
+          </FormField>
+
+          <FormField
+            label="Remarks/Note"
+            icon={NotebookPen}
+            className="sm:col-span-2 lg:col-span-3"
+          >
+            <textarea
+              name="remarks"
+              rows={3}
+              placeholder="Optional remarks or note"
+              className={input}
+            />
           </FormField>
         </div>
 

@@ -32,6 +32,7 @@ export async function createPayment(
   const bankType = String(formData.get("bankType") ?? "").trim();
   const bankName = String(formData.get("bankName") ?? "").trim();
   const assignedPerson = String(formData.get("assignedPerson") ?? "").trim();
+  const remarks = String(formData.get("remarks") ?? "").trim();
   const relatedSaleReferenceId = String(
     formData.get("relatedSaleReferenceId") ?? ""
   ).trim();
@@ -75,6 +76,7 @@ export async function createPayment(
       bankType: bankType || undefined,
       bankName: bankName || undefined,
       assignedPerson: assignedPerson || undefined,
+      remarks: remarks || undefined,
       entryBy: user.name,
       createdBy: new Types.ObjectId(user.id),
       createdByRole: primaryRole(user.roles),

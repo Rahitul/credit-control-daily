@@ -462,7 +462,7 @@ export async function PaymentsView({
           {/* Fixed-height scroll box: the sticky header pins to its top edge and
               the horizontal scrollbar stays visible at its bottom edge. */}
           <div className="max-h-[70vh] overflow-x-auto">
-            <table className="table-dark table-sticky min-w-[1300px]">
+            <table className="table-dark table-sticky min-w-[1500px]">
               <thead>
                 <tr>
                   <th>Rcv Date</th>
@@ -477,6 +477,7 @@ export async function PaymentsView({
                   <th>Bank</th>
                   <th>Assigned</th>
                   <th>Entry By</th>
+                  <th>Remarks</th>
                   <th>Status</th>
                   {canApprove ? <th className="text-right">Action</th> : null}
                 </tr>
@@ -547,6 +548,9 @@ export async function PaymentsView({
                         ) : (
                           <span className="text-zinc-500">—</span>
                         )}
+                      </td>
+                      <td className="max-w-[220px] whitespace-normal">
+                        {p.remarks ?? "—"}
                       </td>
                       <td className="whitespace-nowrap">
                         {p.approvalStatus === "approved" ? (

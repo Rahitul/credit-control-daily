@@ -41,6 +41,8 @@ export interface IPayment {
   bankType?: string;
   bankName?: string;
   assignedPerson?: string;
+  /** Free-hand remarks/note entered with the payment — display only. */
+  remarks?: string;
   entryBy?: string;
   /** User ObjectId of the entering user — source of truth; name/role resolved from User at read time */
   createdBy?: Types.ObjectId;
@@ -84,6 +86,7 @@ const paymentSchema = new Schema<IPayment>(
     bankType: { type: String, trim: true },
     bankName: { type: String, trim: true },
     assignedPerson: { type: String, trim: true },
+    remarks: { type: String, trim: true },
     entryBy: { type: String },
     createdBy: { type: Schema.Types.ObjectId, ref: "User", index: true },
     createdByRole: { type: String, trim: true, index: true },
